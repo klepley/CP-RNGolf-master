@@ -143,7 +143,7 @@ class Play extends Phaser.Scene {
 
         //%
         scoreConfig.align = 'left'
-        this.percent = this.add.text(width - 100, 0, this.PERCENT, scoreConfig)
+        this.percent = this.add.text(width - 150, 0, this.PERCENT, scoreConfig)
 
         //shots
         scoreConfig.align = 'right'
@@ -152,7 +152,7 @@ class Play extends Phaser.Scene {
         //score
         scoreConfig.align = 'center'
         scoreConfig.fixedWidth = 0
-        this.score = this.add.text(width/2 - 50, 0, this.MAKES, scoreConfig)
+        this.score = this.add.text(width/2 - 45, 0, this.MAKES, scoreConfig)
     }
 
     update() {
