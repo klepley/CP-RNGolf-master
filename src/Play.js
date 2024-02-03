@@ -8,6 +8,12 @@ class Play extends Phaser.Scene {
         this.SHOT_VELOCITY_X = 200
         this.SHOT_VELOCITY_Y_MIN = 700
         this.SHOT_VELOCITY_Y_MAX = 1100
+        
+        //counter and average and stuff
+        this.SHOT_COUNTER = 0
+        this.CURRENT_COUNT = 0
+        this.MAKES = 0
+        this.PERCENT = 0
     }
 
     preload() {
@@ -91,6 +97,10 @@ class Play extends Phaser.Scene {
 
             // Set ball velocity in the y-direction to a random value between SHOT_VELOCITY_Y_MIN and SHOT_VELOCITY_Y_MAX
             this.ball.body.setVelocityY(Phaser.Math.Between(this.SHOT_VELOCITY_Y_MIN, this.SHOT_VELOCITY_Y_MAX) * shotDirection);
+            //Inc Counters
+            this.SHOT_COUNTER += 1
+            this.shots.text = this.SHOT_COUNTER
+            this.CURRENT_COUNT += 1
         });
 
 
@@ -100,6 +110,13 @@ class Play extends Phaser.Scene {
             ball.setPosition(width / 2, height - height / 10)
             ball.setVelocityX(0)
             ball.setVelocityY(0)
+            //Increase nums
+            this.MAKES =+ 1
+            this.score.text = `total shots: ${this.CURRENT_COUNT}`
+            this.CURRENT_COUNT = 0
+            this.PERCENT = 100 * this.MAKES / this.SHOT_COUNTER
+            this.percent.text = this.PERCENT
+
             
         })
 
@@ -109,6 +126,33 @@ class Play extends Phaser.Scene {
 
         // ball/one-way collision
         this.physics.add.collider(this.ball, this.oneWay)
+
+        //score config
+        let scoreConfig = {
+            fontFamily: 'Comic Sans',
+            fontSize: '24px',
+            backgroundColor: '#FFFFFF',
+            color: '#000000',
+            align: 'right',
+            padding: {
+              top: 5,
+              bottom: 5,
+            },
+            fixedWidth: 100
+        }
+
+        //%
+        scoreConfig.align = 'left'
+        this.percent = this.add.text(width - 100, 0, this.PERCENT, scoreConfig)
+
+        //shots
+        scoreConfig.align = 'right'
+        this.shots = this.add.text(0, 0, this.SHOT_COUNTER, scoreConfig)
+
+        //score
+        scoreConfig.align = 'center'
+        scoreConfig.fixedWidth = 0
+        this.score = this.add.text(width/2 - 50, 0, this.MAKES, scoreConfig)
     }
 
     update() {
