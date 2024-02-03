@@ -48,15 +48,15 @@ class Play extends Phaser.Scene {
         wallB.body.setImmovable(true)
 
         //Set veloc and bounce for wall
-        wallA.body.setVelocityX(-200)
+        wallA.body.setVelocityX(-300)
         wallA.body.setBounceX(1)
 
         //Wall group
         this.walls = this.add.group([wallA, wallB])
 
         // add one-way
-        this.oneWay = this.physics.add.sprite(width/2, height/4*3, 'oneway')
-        this.oneWay.setX(Phaser.Math.Between(0+this.oneWay.width/2, width - this.oneWay.width/2))
+        this.oneWay = this.physics.add.sprite(width / 2, height / 4*3, 'oneway')
+        this.oneWay.setX(Phaser.Math.Between(0+this.oneWay.width / 2, width - this.oneWay.width / 2))
         this.oneWay.body.setImmovable(true)
         this.oneWay.body.checkCollision.down = false
 
